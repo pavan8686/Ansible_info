@@ -1,0 +1,39 @@
+nsible installation and Conf on RHEL8
+
+Yum update
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+yum install python2 (python 2.7.15)
+pip2 --version
+pip2 install ansible
+ansible --version
+cd /etc/
+mkdir ansible
+cd ansible
+mkdir roles
+touch ansible.cfg hosts
+useradd ansadmin
+passwd ansadmin
+visudo (To give the Root permissions to the user)
+vi /etc/ssh/sshd.config
+PasswordAuthentication yes (Uncomment for the 1st one and comment to the 3rd one)
+cat /etc/ssh/sshd_config | grep Port
+sudo su ansadmin (or) su - ansadmin
+ansible --version
+
+
+mkdir my_ansible_prod
+cd my_ansible_prod
+touch ansible.cfg
+ansible --version
+touch hosts
+vi ansible.cfg
+[defaults]
+inventory     = ./hosts
+host_key-checking = False
+
+~]$ ssh-keygen
+cd .ssh
+ssh-copy-id (node ip) (This is the password less authentaction)
+ssh node ip (without asking password to connect with your managed node/remote server.
+ansible all -m ping
+ansible all -m ping -i hosts
